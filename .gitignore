@@ -1,0 +1,4 @@
+pet_env/
+*.pyc
+*.sqlite3
+*.jpg
