@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.http import Http404
 
 from .models import Pet
-
+from .forms import PetForm
 
 def home(request):
     pets = Pet.objects.all()
@@ -15,3 +16,15 @@ def pet_detail(request, id):
     except Pet.DoesNotExist:
         raise Http404('Pet not found')
     return render(request, 'pet_detail.html', {'pet': pet})
+
+def new_pet(request):
+    if request.method != 'POST':
+        form = PetForm()
+    else:
+        form = PetForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('home'))
+
+    context = {'form': form}
+    return render(request, 'new_pet.html', context)
