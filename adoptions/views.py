@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.http import Http404
+from django.contrib.auth.decorators import login_required
+
 
 from .models import Pet
 from .forms import PetForm
@@ -17,6 +19,7 @@ def pet_detail(request, id):
         raise Http404('Pet not found')
     return render(request, 'pet_detail.html', {'pet': pet})
 
+@login_required
 def new_pet(request):
     if request.method != 'POST':
         form = PetForm()
@@ -29,6 +32,7 @@ def new_pet(request):
     context = {'form': form}
     return render(request, 'new_pet.html', context)
 
+@login_required
 def edit_pet(request, id):
     pet = Pet.objects.get(id=id)
 
