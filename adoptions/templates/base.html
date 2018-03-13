@@ -22,9 +22,9 @@
                             <p>We treat your pets like we treat our own.</p>
                         </div>
                         <div id="header-links" style="float: right">
-							<a href="{% url 'new_pet' %}">Add a pet</a>
                             {% if user.is_authenticated %}
-                                Hello, {{ user.username }}
+                                Hello, {{ user.username }} -
+                                <a href="{% url 'new_pet' %}">Add a pet</a> -
                                 <a href="{% url 'logout' %}">Log out</a>
                             {% else %}
                                 <a href="{% url 'register' %}">Register</a>

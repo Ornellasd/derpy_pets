@@ -10,7 +10,7 @@ def logout_view(request):
   return HttpResponseRedirect(reverse('home'))
 
 def register(request):
-  if request.method == 'POST':
+  if request.method != 'POST':
     form = UserCreationForm()
   else:
     form = UserCreationForm(data=request.POST)

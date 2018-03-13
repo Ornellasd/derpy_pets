@@ -1,7 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
-from django.http import Http404
 from django.contrib.auth.decorators import login_required
 
 
@@ -26,7 +25,9 @@ def new_pet(request):
     else:
         form = PetForm(request.POST)
         if form.is_valid():
-            form.save()
+            new_pet = form.save(commit=False)
+            new_pet.owner = request.user
+            new_pet.save()
             return HttpResponseRedirect(reverse('home'))
 
     context = {'form': form}
@@ -35,6 +36,9 @@ def new_pet(request):
 @login_required
 def edit_pet(request, id):
     pet = Pet.objects.get(id=id)
+
+    if pet.owner != request.user:
+        raise Http404
 
     if request.method != 'POST':
         form = PetForm(instance=pet)

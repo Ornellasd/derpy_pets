@@ -1,9 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Pet(models.Model):
     SEX_CHOICES = [
-        ('M', 'Male'), 
+        ('M', 'Male'),
         ('F', 'Female'),
     ]
     name = models.CharField(max_length=100)
@@ -15,6 +16,7 @@ class Pet(models.Model):
     submission_date = models.DateTimeField(auto_now_add=True)
     age = models.IntegerField(null=True)
     vaccinations = models.ManyToManyField('Vaccine', blank=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Vaccine(models.Model):
     name = models.CharField(max_length=50)
