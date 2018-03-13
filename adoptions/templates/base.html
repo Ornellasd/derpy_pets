@@ -23,7 +23,12 @@
                         </div>
                         <div id="header-links" style="float: right">
 							<a href="{% url 'new_pet' %}">Add a pet</a>
-                            <a href="{% url 'users:login'}">Log in</a>
+                            {% if user.is_authenticated %}
+                                Hello, {{ user.username }}
+                                <a href="{% url 'logout' %}">Log out</a>
+                            {% else %}
+                                <a href="{% url 'login' %}">Log in</a>
+                            {% endif %}
                         </div>
                     </div>
 
