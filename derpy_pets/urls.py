@@ -13,6 +13,9 @@ urlpatterns = [
     path('new_pet', views.new_pet, name='new_pet'),
     path('adoptions/<int:id>/', views.pet_detail, name='pet_detail'),
     path('adoptions/<int:id>/edit_pet/', views.edit_pet, name='edit_pet'),
+    path('adoptions/<int:id>/delete_pet', views.delete_pet, name='delete_pet'),
 ]
 
 
+# Page for deleting an entry.
+    #path('delete_entry/<int:entry_id>/', views.delete_entry, name='delete_entry'),

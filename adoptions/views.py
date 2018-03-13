@@ -48,5 +48,11 @@ def edit_pet(request, id):
             form.save()
             return HttpResponseRedirect(reverse('home'))
 
-    #context = {'pet': pet,'form': form}
-    return render(request, 'edit_pet.html', {'pet': pet, 'form': form})
+    context = {'pet': pet,'form': form}
+    return render(request, 'edit_pet.html', context)
+
+@login_required
+def delete_pet(request, id):
+    pet = Pet.objects.get(pk=id)
+    pet.delete()
+    return HttpResponseRedirect(reverse('home'))

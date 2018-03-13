@@ -23,6 +23,9 @@
 	<p>Submitted by: {{ pet.owner }}</p>
 	<p>Submitted on: {{ pet.submission_date|date:"M d Y" }}</p>
 	<p>Description: {{ pet.description }}</p>
+	{% if pet.owner == request.user %}
 	<p><a href="{% url 'edit_pet' pet.id %}">edit pet</a></p>
+	<p><a href="{% url 'delete_pet' pet.id %}">delete pet</a></p>
+	{% endif %}
 </div>
 {% endblock %}
