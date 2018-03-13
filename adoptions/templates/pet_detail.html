@@ -20,7 +20,7 @@
 			{% endfor %}
 		</ul>
 	{% endif %}
-	<p>Submitted by: {{ pet.submitter }}</p>
+	<p>Submitted by: {{ pet.owner }}</p>
 	<p>Submitted on: {{ pet.submission_date|date:"M d Y" }}</p>
 	<p>Description: {{ pet.description }}</p>
 	<p><a href="{% url 'edit_pet' pet.id %}">edit pet</a></p>
