@@ -16,6 +16,3 @@ urlpatterns = [
     path('adoptions/<int:id>/delete_pet', views.delete_pet, name='delete_pet'),
 ]
 
-
-# Page for deleting an entry.
-    #path('delete_entry/<int:entry_id>/', views.delete_entry, name='delete_entry'),
